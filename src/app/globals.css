@@ -1,26 +1,135 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-bone: #F4F1EC;
+  --color-charcoal: #1C1A19;
+  --color-clay: #A8624A;
+  --color-brass: #C9A227;
+  --color-stone: #8A857E;
+  --color-clay-light: #C07A62;
+  --color-bone-warm: #EBE7DF;
+  --color-charcoal-light: #2A2726;
+
+  --background: var(--color-bone);
+  --foreground: var(--color-charcoal);
+  --accent: var(--color-clay);
+  --divider: rgba(201, 162, 39, 0.3);
+  --muted: var(--color-stone);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bone: var(--color-bone);
+  --color-bone-warm: var(--color-bone-warm);
+  --color-charcoal: var(--color-charcoal);
+  --color-charcoal-light: var(--color-charcoal-light);
+  --color-clay: var(--color-clay);
+  --color-clay-light: var(--color-clay-light);
+  --color-brass: var(--color-brass);
+  --color-stone: var(--color-stone);
+
+  --font-serif: var(--font-fraunces), "Georgia", serif;
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --radius-architectural: 2px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background-color: var(--color-bone);
+  color: var(--color-charcoal);
+  font-family: var(--font-sans);
+  scroll-behavior: auto; /* Let Lenis handle smooth scroll */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bone);
+  color: var(--color-charcoal);
+  min-height: 100vh;
+  overflow-x: hidden;
+  selection-background-color: var(--color-clay);
+  selection-color: var(--color-bone);
+}
+
+::selection {
+  background-color: #A8624A;
+  color: #F4F1EC;
+}
+
+/* Custom architectural corners */
+.radius-arch {
+  border-radius: 2px;
+}
+
+/* Typography styles */
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+/* Hairline brass divider */
+.divider-brass {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(201, 162, 39, 0.4) 20%, rgba(201, 162, 39, 0.6) 50%, rgba(201, 162, 39, 0.4) 80%, transparent 100%);
+}
+
+.divider-subtle {
+  height: 1px;
+  background-color: rgba(138, 133, 126, 0.18);
+}
+
+/* Lenis smooth scrolling base rules */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Image clip-path reveals */
+.reveal-clip {
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-clip-hidden {
+  clip-path: inset(100% 0 0 0);
+}
+
+/* Hide scrollbar for clean horizontal rails */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Fluid responsive typography utilities */
+.text-hero-clamp {
+  font-size: clamp(2.75rem, 7vw + 1rem, 7.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+.text-section-clamp {
+  font-size: clamp(2rem, 4vw + 0.5rem, 4.25rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
 }
